@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import Note from "@/components/Note";
 import WeatherCard from "@/components/WeatherCard";
@@ -6,10 +6,14 @@ import { useEffect, useState } from "react";
 import { getCachedWeather, saveWeatherToCache } from "@/lib/storage";
 import { fetchWeather, WeatherData } from "@/lib/weatherApi";
 
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
+
 export default function Page() {
-  // Получаем параметр city из URL вручную
   const getCityFromSearch = () => {
-    if (typeof window === "undefined") return ""; // безопасность для SSR
+    if (typeof window === "undefined") return "";
     const params = new URLSearchParams(window.location.search);
     return params.get("city") || "";
   };
@@ -46,7 +50,6 @@ export default function Page() {
     setLoading(false);
   };
 
-  // Твой useEffect оставляем без изменений
   useEffect(() => {
     if (!cityParam) return;
     const fetchInitial = async () => {
@@ -59,6 +62,20 @@ export default function Page() {
     setCity(e.target.value);
     setHasSearched(false);
   };
+
+  useEffect(() => {
+    const handler = (e: BeforeInstallPromptEvent) => {
+      e.preventDefault();
+    };
+
+    window.addEventListener("beforeinstallprompt", handler as EventListener);
+
+    return () =>
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handler as EventListener
+      );
+  }, []);
 
   return (
     <div className="p-4 max-w-xl mx-auto">
