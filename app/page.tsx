@@ -1,10 +1,9 @@
 import Link from "next/link";
-// import dynamic from "next/dynamic";
-import HomeClient from "@/components/HomeClient";
+import dynamic from "next/dynamic";
 
-// const HomeClient = dynamic(() => import("../components/HomeClient"), {
-//   ssr: false,
-// });
+const HomeClient = dynamic(() => import("../components/HomeClient"), {
+  ssr: false,
+});
 
 export default function Page() {
   return (
