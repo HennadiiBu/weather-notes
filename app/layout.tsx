@@ -1,4 +1,3 @@
-// import { title } from "process";
 import "./globals.css";
 import ServiceWorkerRegister from "./sw";
 
