@@ -1,10 +1,23 @@
 "use client";
 
-import { getSavedCities } from "../../lib/storage";
+import { useEffect, useState } from "react";
+import { getSavedCities } from "@/lib/storage";
+
+interface SavedCity {
+  temp: number;
+}
 
 export default function SavedPage() {
-  const saved = getSavedCities();
-  const cities = Object.keys(saved);
+  const [cities, setCities] = useState<string[]>([]);
+  const [savedData, setSavedData] = useState<Record<string, SavedCity>>({});
+
+  useEffect(() => {
+    setTimeout(() => {
+      const saved = getSavedCities();
+      setSavedData(saved);
+      setCities(Object.keys(saved));
+    });
+  }, []);
 
   return (
     <div className="p-4 max-w-xl mx-auto">
@@ -18,11 +31,15 @@ export default function SavedPage() {
           className="border p-3 mb-2 rounded flex justify-between"
         >
           <div>
-            <strong>{city}</strong> — {saved[city].temp}°C
+            <strong>{city}</strong> — {savedData[city].temp}°C
           </div>
           <button
-            className="p-2 bg-blue-600 text-white rounded  cursor-pointer"
-            onClick={() => (window.location.href = `/?city=${city}`)}
+            className="p-2 bg-blue-600 text-white rounded cursor-pointer"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                window.location.href = `/?city=${city}`;
+              }
+            }}
           >
             View
           </button>
