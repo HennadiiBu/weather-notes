@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import WeatherCard from "../components/WeatherCard";
@@ -43,8 +43,10 @@ export default function HomeClient() {
 
   useEffect(() => {
     if (!cityParam) return;
-    search();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fetchInitial = async () => {
+      await search();
+    };
+    fetchInitial();
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -14,8 +14,6 @@ export default function Page() {
           Saved
         </Link>
       </div>
-
-      {/* Динамический клиентский компонент */}
       <HomeClient />
     </div>
   );
