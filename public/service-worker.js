@@ -3,7 +3,7 @@ const CACHE = "weather-cache-v1";
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => {
-      return cache.addAll(["/", "/offline.html"]);
+      return cache.addAll(["/", "/offline.html", "/saved"]);
     })
   );
   self.skipWaiting();
