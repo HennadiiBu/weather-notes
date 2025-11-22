@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🌦 Weather Notes PWA / PWA “Weather Notes”
 
-## Getting Started
+1. Клонируем репозиторий
+git clone https://github.com/USERNAME/REPO_NAME.git
+cd REPO_NAME
 
-First, run the development server:
+2. Устанавливаем зависимости
+npm install
+# или
+yarn install
 
-```bash
+3. Настройка переменных окружения
+
+Создайте .env.local, если проект использует переменные:
+
+NEXT_PUBLIC_API_KEY=ваш_api_key
+NEXT_PUBLIC_ANOTHER_VAR=значение
+
+
+Можно скопировать из .env.example.
+
+4. Запуск проекта в режиме разработки
 npm run dev
-# or
+# или
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Откройте http://localhost:3000
+ в браузере.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Сборка и продакшн (опционально)
+npm run build
+npm start
+# или
+yarn build
+yarn start
 
-## Learn More
+6. Проверка PWA и оффлайн-режима
 
-To learn more about Next.js, take a look at the following resources:
+Откройте приложение в Chrome на компьютере или телефоне.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+В DevTools → Application → Service Workers убедитесь, что сервис-воркер зарегистрирован.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Проверка оффлайн:
 
-## Deploy on Vercel
+В DevTools выберите Network → Offline.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Обновите страницу — для маршрутов без кэша покажется offline.html.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Страницы вроде /saved будут показывать данные из localStorage.
+
+На мобильных устройствах Chrome автоматически покажет баннер “Add to Home screen”, когда PWA готова к установке.
