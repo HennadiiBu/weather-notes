@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getSavedCities } from "@/lib/storage";
+import Link from "next/link";
 
 interface SavedCity {
   temp: number;
@@ -21,8 +22,12 @@ export default function SavedPage() {
 
   return (
     <div className="p-4 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Saved cities</h1>
-
+      <div className="flex justify-between gap-1 items-center mb-4">
+        <h1 className="text-2xl font-bold ">Saved cities</h1>
+        <Link href={"/"} className="p-2 border-2 rounded-2xl">
+          to main page
+        </Link>
+      </div>
       {cities.length === 0 && <p>No saved cities.</p>}
 
       {cities.map((city) => (
